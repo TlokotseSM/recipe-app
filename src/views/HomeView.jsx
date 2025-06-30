@@ -1,5 +1,5 @@
-import { useRecipes } from '../hooks/useRecipes';
-import RecipeList from '../components/recipes/RecipeList';
+import { useRecipes } from '../hooks/useRecipes.jsx';
+import RecipeList from '../components/recipes/RecipeList.jsx';
 
 const HomeView = () => {
   const {

@@ -1,35 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { RecipeProvider } from './context/RecipeContext.jsx';
+import HomeView from './views/HomeView.jsx';
+import RecipeDetailView from './views/RecipeDetailView.jsx';
+import AddEditRecipeView from './views/AddEditRecipeView.jsx';
+import SearchResultsView from './views/SearchResultsView.jsx';
+import TagResultsView from './views/TagResultsView.jsx';
+import Header from './components/common/Header.jsx';
+import Footer from './components/common/Footer.jsx';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Router>
+      <RecipeProvider>
+        <div className="app">
+          <Header />
+          <main>
+            <Routes>
+              <Route path="/" element={<HomeView />} />
+              <Route path="/recipe/:id" element={<RecipeDetailView />} />
+              <Route path="/add-recipe" element={<AddEditRecipeView />} />
+              <Route path="/edit-recipe/:id" element={<AddEditRecipeView />} />
+              <Route path="/search" element={<SearchResultsView />} />
+              <Route path="/tag/:tag" element={<TagResultsView />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </RecipeProvider>
+    </Router>
+  );
 }
 
-export default App
+export default App;
